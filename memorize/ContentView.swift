@@ -10,23 +10,34 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         HStack  {
-            CardView() \
-            CardView()
-            CardView()
-            CardView()
+            CardView(isFaceUp: true)
+            CardView(isFaceUp: false)
+            CardView(isFaceUp: true)
+            CardView(isFaceUp: true)
         }
         .padding()
+        .foregroundColor(.red)
     }
 }
 
 struct CardView: View {
+    var isFaceUp: Bool
     var body: some View {
-        ZStack (alignment: .center) {
-            RoundedRectangle(cornerRadius: 20.0)
-                .stroke(lineWidth: 3)
-                .fill(.red)
-                .colorInvert()
-            Text("Hello, my worlds!")
+        if isFaceUp {
+            ZStack (alignment: .center) {
+                RoundedRectangle(cornerRadius: 20.0)
+                    .fill(.white)
+                RoundedRectangle(cornerRadius: 20.0)
+                    .stroke(lineWidth: 3)
+                    .fill(.red)
+                Text("😇")
+                    .font(.largeTitle)
+            }
+        } else {
+            ZStack (alignment: .center) {
+                RoundedRectangle(cornerRadius: 20.0)
+                    .fill()
+            }
         }
     }
 }
@@ -34,5 +45,8 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
+        ContentView()
+            .preferredColorScheme(.light)
     }
 }
