@@ -24,10 +24,11 @@ struct CardView: View {
     var isFaceUp: Bool
     var body: some View {
         if isFaceUp {
+            let shape =  RoundedRectangle(cornerRadius: 20.0)
             ZStack (alignment: .center) {
-                RoundedRectangle(cornerRadius: 20.0)
+                shape
                     .fill(.white)
-                RoundedRectangle(cornerRadius: 20.0)
+                shape
                     .stroke(lineWidth: 3)
                     .fill(.red)
                 Text("😇")
@@ -35,7 +36,7 @@ struct CardView: View {
             }
         } else {
             ZStack (alignment: .center) {
-                RoundedRectangle(cornerRadius: 20.0)
+                shape
                     .fill()
             }
         }
