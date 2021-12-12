@@ -9,43 +9,45 @@ import SwiftUI
 
 struct ContentView: View {
     //var emojis: Array<String> = ["🥲", "🥲", "😇", "😍", "😀"] //[String]
-    @State var emojiCount: Int = 4
+    @State var emojiCount: Int = 20
     var emojis: [String] = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "🥲", "☺️", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🥸"]
     var body: some View {
         VStack {
-            HStack {
-                ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
-                    CardView(content: emoji)
+            ScrollView {
+                LazyVGrid (columns: [GridItem(.adaptive(minimum: 74))]) {
+                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fill)
+                    }
                 }
+                .foregroundColor(.red)
             }
+            Spacer(minLength: 20)
             HStack {
                 remove
                 Spacer()
                 add
             }
+            .font(.largeTitle)
             .padding(.horizontal)
         }
-        .foregroundColor(.red)
     }
     var remove: some View {
         Button (action: {
-            emojiCount -= 1
-        }, label: {
-            VStack {
-                Text("Remove")
-                Text("Card")
+            if emojiCount > 1 {
+                emojiCount -= 1
             }
+        }, label: {
+            Image(systemName: "minus.circle")
         })
     }
     var add: some View {
-        Button (action: {
-            emojiCount += 1
-        }, label: {
-            VStack {
-                Text("Add")
-                Text("Card")
+        Button {
+            if emojiCount < emojis.count {
+                emojiCount += 1
             }
-        })
+        } label: {
+            Image(systemName: "plus.circle")
+        }
     }
 }
 
@@ -59,8 +61,10 @@ struct CardView: View {
                 shape
                     .fill(.white)
                 shape
-                    .stroke(lineWidth: 3)
-                    .fill(.red)
+                    .fill()
+                    .foregroundColor(.white)
+                shape
+                    .strokeBorder(lineWidth: 6)
                 Text(content)
                     .font(.largeTitle)
             } else {
@@ -77,6 +81,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .preferredColorScheme(.dark)
+.previewInterfaceOrientation(.portrait)
         ContentView()
             .preferredColorScheme(.light)
     }
