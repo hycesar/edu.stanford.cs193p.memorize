@@ -3,7 +3,7 @@
 //  memorize
 //
 //  Created by hcbp on 04/12/21.
-//
+//  This is the view!
 
 import SwiftUI
 
@@ -21,6 +21,7 @@ struct ContentView: View {
                 }
                 .foregroundColor(.red)
             }
+            /*
             Spacer(minLength: 20)
             HStack {
                 remove
@@ -29,8 +30,10 @@ struct ContentView: View {
             }
             .font(.largeTitle)
             .padding(.horizontal)
+            */
         }
     }
+    /*
     var remove: some View {
         Button (action: {
             if emojiCount > 1 {
@@ -49,6 +52,7 @@ struct ContentView: View {
             Image(systemName: "plus.circle")
         }
     }
+    */
 }
 
 struct CardView: View {
